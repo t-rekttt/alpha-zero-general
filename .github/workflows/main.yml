@@ -1,0 +1,18 @@
+name: Main
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - run: pip3 install onnxruntime numba tqdm colorama coloredlogs && ./pit.py -p splendor/pretrained_2players.pt -P splendor/pretrained_4players.pt -n 10 
